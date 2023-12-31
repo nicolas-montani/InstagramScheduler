@@ -14,7 +14,7 @@ import lombok.Setter;
 @Table(name = "users")
 @Getter
 @Setter
-public class User {
+public class User extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -26,6 +26,7 @@ public class User {
     @Column(name= "password")
     private String password;
 
+    @Column(name= "campains")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Campain> campains = new ArrayList<>();
 

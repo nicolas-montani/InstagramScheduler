@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "scheduled_posts")
 @Getter
 @Setter
-public class Post {
+public class Post extends AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "scheduled_posts")
 @Getter
 @Setter
-public class Campain {
+public class Campain extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Campain {
     @Column(name= "campain_name" , unique=true)
     private String campain_name;
 
-    @Column(name= "post")
+    @Column(name= "posts")
     @OneToMany(mappedBy = "campain", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
