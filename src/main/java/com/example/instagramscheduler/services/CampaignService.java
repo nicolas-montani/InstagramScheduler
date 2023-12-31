@@ -1,7 +1,7 @@
 package com.example.instagramscheduler.services;
 
-import com.example.instagramscheduler.model.Campain;
-import com.example.instagramscheduler.repository.CampainRepository;
+import com.example.instagramscheduler.model.Campaign;
+import com.example.instagramscheduler.repository.CampaignRepository;
 
 import org.springframework.stereotype.Service;
 
@@ -12,19 +12,19 @@ import org.springframework.data.jpa.domain.Specification;
 
 
 @Service
-public class CampainService {
+public class CampaignService {
+    /*
+    private final CampaignRepository repository;
 
-    private final CampainRepository repository;
-
-    public CampainService(CampainRepository repository) {
+    public CampaignService(CampaignRepository repository) {
         this.repository = repository;
     }
 
-    public Optional<Campain> get(Long id) {
+    public Optional<Campaign> get(Long id) {
         return repository.findById(id);
     }
 
-    public Campain update(Campain entity) {
+    public Campaign update(Campaign entity) {
         return repository.save(entity);
     }
 
@@ -32,16 +32,16 @@ public class CampainService {
         repository.deleteById(id);
     }
 
-    public Page<Campain> list(Pageable pageable) {
+    public Page<Campaign> list(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public Page<Campain> list(Pageable pageable, Specification<Campain> filter) {
+    public Page<Campaign> list(Pageable pageable, Specification<Campaign> filter) {
         return repository.findAll(filter, pageable);
     }
 
     public int count() {
         return (int) repository.count();
     }
-
+    */
 }

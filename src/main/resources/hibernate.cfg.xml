@@ -26,7 +26,7 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         <mapping class="com.example.instagramscheduler.model.User" />
         <mapping class="com.example.instagramscheduler.model.Role" />
-        <mapping class="com.example.instagramscheduler.model.Campain" />
+        <mapping class="com.example.instagramscheduler.model.Campaign" />
         <mapping class="com.example.instagramscheduler.model.Post" />
     </session-factory>
 </hibernate-configuration>

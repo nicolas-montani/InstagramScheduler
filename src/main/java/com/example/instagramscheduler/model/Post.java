@@ -7,13 +7,10 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "scheduled_posts")
+@Table(name = "post")
 @Getter
 @Setter
 public class Post extends AbstractEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "image_url")
     private String imageUrl;
@@ -21,8 +18,14 @@ public class Post extends AbstractEntity{
     private String caption;
     @Column(name = "scheduled_time")
     private LocalDateTime scheduledTime;
-    // Other attributes as needed
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "campaign_id")
+    private Campaign campaign;
+
+
+    // Other attributes as needed
+    /*
     public Post() {
     }
 
@@ -31,4 +34,5 @@ public class Post extends AbstractEntity{
         this.caption = caption;
         this.scheduledTime = scheduledTime;
     }
+     */
 }
