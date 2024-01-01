@@ -12,6 +12,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -29,8 +30,8 @@ import jakarta.annotation.security.RolesAllowed;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@PageTitle("ScheduleAdmin")
-@Route(value = "ScheduleAdmin", layout = MainLayout.class)
+@PageTitle("Create Campaign")
+@Route(value = "Campaign", layout = MainLayout.class)
 @RolesAllowed("ADMIN")
 @Uses(Icon.class)
 public class CampaignView extends AppLayout {
@@ -65,7 +66,7 @@ public class CampaignView extends AppLayout {
         contentLayout.setSizeFull();
         contentLayout.setPadding(false);
         contentLayout.add(createCampaignList());
-        contentLayout.add(createPostGrid());
+        //contentLayout.add(createPostGrid());
         return contentLayout;
     }
 
@@ -73,7 +74,7 @@ public class CampaignView extends AppLayout {
         VerticalLayout campaignLayout = new VerticalLayout();
         campaignLayout.setSizeFull();
         campaignLayout.setPadding(false);
-        campaignLayout.setWidth("350px");
+        campaignLayout.setWidth("100em");
 
         campaign.setColumns("campaign_name");
         campaign.addComponentColumn(item -> {
@@ -174,10 +175,18 @@ public class CampaignView extends AppLayout {
                     updatePostList();
                     dialog.close();
                 });
+
+
+                Button delete = new Button("Delete", event -> {
+                    postService.delete(item.getId());
+                    updatePostList();
+                    dialog.close();
+                });
+
                 Button cancel = new Button("Cancel", event -> {
                     dialog.close();
                 });
-                HorizontalLayout buttons = new HorizontalLayout(save, cancel);
+                HorizontalLayout buttons = new HorizontalLayout(save,delete, cancel);
                 dialog.add(form, buttons);
                 dialog.open();
             });
@@ -248,20 +257,6 @@ public class CampaignView extends AppLayout {
         if (postId == null) {
             return;
         }
-
-        ShoppingList shoppingList = shoppingListService.getShoppingListById(shoppingListId).orElse(null);
-        if (shoppingList == null) {
-            return;
-        }
-        // search for name, description, category or store containing the filter text
-        List<ShoppingItem> filteredItems = shoppingList.getShoppingItems().stream()
-                .filter(item -> item.getName().toLowerCase().contains(filterText.toLowerCase())
-                        || (item.getDescription() != null && item.getDescription().toLowerCase().contains(filterText.toLowerCase()))
-                        || (item.getCategory() != null && item.getCategory().getName().toLowerCase().contains(filterText.toLowerCase()))
-                        || (item.getStore() != null && item.getStore().getName().toLowerCase().contains(filterText.toLowerCase())))
-                .collect(Collectors.toList());
-
-        grid.setItems(filteredItems);
     }
 
     //New Campaign DIalog

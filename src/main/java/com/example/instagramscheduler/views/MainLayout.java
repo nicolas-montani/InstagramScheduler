@@ -17,7 +17,6 @@ import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
-import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
 import com.vaadin.flow.theme.lumo.LumoUtility;
@@ -61,13 +60,13 @@ public class MainLayout extends AppLayout {
 
         }
 
-        if (accessChecker.hasAccess(ScheduleView.class)) {
-            nav.addItem(new SideNavItem("ScheduleUser", ScheduleView.class, LineAwesomeIcon.INSTAGRAM.create()));
+        if (accessChecker.hasAccess(PostView.class)) {
+            nav.addItem(new SideNavItem("Create Post", PostView.class, LineAwesomeIcon.INSTAGRAM.create()));
 
         }
 
         if (accessChecker.hasAccess(CampaignView.class)) {
-            nav.addItem(new SideNavItem("ScheduleAdmin", CampaignView.class, LineAwesomeIcon.INSTAGRAM.create()));
+            nav.addItem(new SideNavItem("Create Campaign", CampaignView.class, LineAwesomeIcon.INSTAGRAM.create()));
 
         }
         /*
