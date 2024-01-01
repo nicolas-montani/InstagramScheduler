@@ -3,6 +3,7 @@ package com.example.instagramscheduler.services;
 import com.example.instagramscheduler.model.Post;
 import com.example.instagramscheduler.repository.PostRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -44,4 +45,11 @@ public class PostService {
             return (int) repository.count();
         }
 
+    public void save(Post newPost) {
+        repository.save(newPost);
+    }
+
+    public List<Post> findAll() {
+        return repository.findAll();
+    }
 }

@@ -17,7 +17,7 @@ public class Post extends AbstractEntity{
     @Column(name = "caption")
     private String caption;
     @Column(name = "scheduled_time")
-    private LocalDateTime scheduledTime;
+    private LocalDateTime  scheduledTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campaign_id")
