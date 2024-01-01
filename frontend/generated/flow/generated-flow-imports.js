@@ -1,6 +1,8 @@
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
 import '@vaadin/vertical-layout/src/vaadin-vertical-layout.js';
 import '@vaadin/app-layout/src/vaadin-app-layout.js';
+import '@vaadin/login/src/vaadin-login-overlay.js';
+import '@vaadin/form-layout/src/vaadin-form-layout.js';
 import '@vaadin/common-frontend/ConnectionIndicator.js';
 import '@vaadin/accordion/src/vaadin-accordion.js';
 import '@vaadin/details/src/vaadin-details.js';
@@ -29,7 +31,6 @@ import 'Frontend/generated/jar-resources/vaadin-time-picker/timepickerConnector.
 import '@vaadin/dialog/src/vaadin-dialog.js';
 import 'Frontend/generated/jar-resources/dndConnector.js';
 import '@vaadin/field-highlighter/src/vaadin-field-highlighter.js';
-import '@vaadin/form-layout/src/vaadin-form-layout.js';
 import '@vaadin/form-layout/src/vaadin-form-item.js';
 import '@vaadin/grid/src/vaadin-grid-column-group.js';
 import '@vaadin/grid/src/vaadin-grid.js';
@@ -43,7 +44,6 @@ import '@vaadin/icons/vaadin-iconset.js';
 import '@vaadin/list-box/src/vaadin-list-box.js';
 import '@vaadin/item/src/vaadin-item.js';
 import '@vaadin/login/src/vaadin-login-form.js';
-import '@vaadin/login/src/vaadin-login-overlay.js';
 import 'Frontend/generated/jar-resources/menubarConnector.js';
 import '@vaadin/menu-bar/src/vaadin-menu-bar.js';
 import '@vaadin/message-input/src/vaadin-message-input.js';

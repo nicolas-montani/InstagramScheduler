@@ -5,6 +5,7 @@ import com.example.instagramscheduler.repository.CampaignRepository;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 @Service
 public class CampaignService {
-    /*
+
     private final CampaignRepository repository;
 
     public CampaignService(CampaignRepository repository) {
@@ -43,5 +44,12 @@ public class CampaignService {
     public int count() {
         return (int) repository.count();
     }
-    */
+
+    public void save(Campaign item) {
+        repository.save(item);
+    }
+
+    public List<Campaign> findAll() {
+        return repository.findAll();
+    }
 }

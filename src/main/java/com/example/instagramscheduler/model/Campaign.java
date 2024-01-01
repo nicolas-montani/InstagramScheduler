@@ -14,7 +14,7 @@ import java.util.List;
 public class Campaign extends AbstractEntity {
 
     @Column(name= "campaign_name" , unique=true)
-    private String campain_name;
+    private String campaign_name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

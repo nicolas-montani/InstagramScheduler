@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import org.springframework.stereotype.Service;
+
+@Service
 public class PostService {
 
         private final PostRepository repository;
