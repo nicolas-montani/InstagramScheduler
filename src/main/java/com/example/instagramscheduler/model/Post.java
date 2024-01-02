@@ -19,20 +19,7 @@ public class Post extends AbstractEntity{
     @Column(name = "scheduled_time")
     private LocalDateTime  scheduledTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
-
-
-    // Other attributes as needed
-    /*
-    public Post() {
-    }
-
-    public Post(String imageUrl, String caption, LocalDateTime scheduledTime, User user) {
-        this.imageUrl = imageUrl;
-        this.caption = caption;
-        this.scheduledTime = scheduledTime;
-    }
-     */
 }

@@ -19,14 +19,10 @@ public class AboutView extends VerticalLayout {
     public AboutView() {
         setSpacing(false);
 
-        Image img = new Image("images/empty-plant.png", "placeholder plant");
-        img.setWidth("200px");
-        add(img);
-
-        H2 header = new H2("This place intentionally left empty");
+        H2 header = new H2("Hi and Welcome To my instagram scheduler!");
         header.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
         add(header);
-        add(new Paragraph("It’s a place where you can grow your own UI 🤗"));
+        add(new Paragraph("In order to start please sign up with the credentials admin/admin."));
 
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);

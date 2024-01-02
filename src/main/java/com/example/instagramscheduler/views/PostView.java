@@ -1,12 +1,12 @@
 package com.example.instagramscheduler.views;
 
-import com.example.instagramscheduler.model.Campaign;
 import com.example.instagramscheduler.model.Post;
 import com.example.instagramscheduler.services.CampaignService;
 import com.example.instagramscheduler.services.PostService;
-import com.example.instagramscheduler.services.UserService;
+import com.example.instagramscheduler.model.Campaign;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -15,6 +15,7 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -27,15 +28,13 @@ import jakarta.annotation.security.RolesAllowed;
 public class PostView extends AppLayout {
 
 
-    private final UserService userService;
     private final PostService postService;
 
     private final CampaignService campaignService;
 
     private final Grid<Post> postGrid = new Grid<>(Post.class);
 
-    public PostView(UserService userService, CampaignService campaignService , PostService postService) {
-        this.userService = userService;
+    public PostView( CampaignService campaignService , PostService postService) {
         this.campaignService = campaignService;
         this.postService = postService;
 
@@ -75,47 +74,74 @@ public class PostView extends AppLayout {
                 dialog.add(new H3("Edit Post"));
                 FormLayout form = new FormLayout();
                 TextField caption = new TextField("Caption");
+                TextField imageUrl = new TextField("Image Url");
+                DatePicker scheduledTime = new DatePicker("Scheduled Time");
+                Select<Campaign> campaignSelect = new Select<>();
+
+                campaignSelect.setLabel("Campaign");
+                campaignSelect.setItems(campaignService.findAll());
+                campaignSelect.setItemLabelGenerator(Campaign::getCampaign_name);
+                campaignSelect.setPlaceholder("Select Campaign");
+
                 caption.setValue(item.getCaption());
-                form.add(caption);
+                imageUrl.setValue(item.getImageUrl());
+                scheduledTime.setValue(item.getScheduledTime().toLocalDate());
+                campaignSelect.setValue(item.getCampaign());
+
+                form.add(caption , imageUrl, scheduledTime, campaignSelect);
                 Button save = new Button("Save", event -> {
                     item.setCaption(caption.getValue());
+                    item.setImageUrl(imageUrl.getValue());
+                    item.setScheduledTime(scheduledTime.getValue().atStartOfDay());
+                    item.setCampaign(campaignSelect.getValue());
                     postService.save(item);
+                    updatePostList();
+                    dialog.close();
+                });
+                Button delete = new Button("Delete", event -> {
+                    postService.delete(item.getId());
                     updatePostList();
                     dialog.close();
                 });
                 Button cancel = new Button("Cancel", event -> {
                     dialog.close();
                 });
-                HorizontalLayout buttons = new HorizontalLayout(save, cancel);
+                HorizontalLayout buttons = new HorizontalLayout(save, delete, cancel);
                 dialog.add(form, buttons);
                 dialog.open();
             });
         }).setHeader("Actions");
         Button newCampaignButton = new Button("New Post", clickEvent -> {
             Dialog dialog = new Dialog();
-            dialog.add(new H3("New Campaign"));
+            dialog.add(new H3("New Post"));
+
             FormLayout form = new FormLayout();
-            TextField caption= new TextField("Caption");
-            
-            form.add(caption);
+
+            TextField caption = new TextField("Caption");
+            TextField imageUrl = new TextField("Image Url");
+            DatePicker scheduledTime = new DatePicker("Scheduled Time");
+            Select<Campaign> campaignSelect = new Select<>();
+
+            campaignSelect.setLabel("Campaign");
+            campaignSelect.setItems(campaignService.findAll());
+            campaignSelect.setItemLabelGenerator(Campaign::getCampaign_name);
+            campaignSelect.setPlaceholder("Select Campaign");
+
+            form.add(caption , imageUrl, scheduledTime, campaignSelect);
             Button save = new Button("Save", event -> {
-                Campaign newCampaign = new Campaign();
-                newCampaign.setCampaign_name(caption.getValue());
-                campaignService.save(newCampaign);
-                updatePostList();
-                dialog.close();
-            });
-            Button delete = new Button("Delete", event -> {
-                Campaign newCampaign = new Campaign();
-                newCampaign.setCampaign_name(caption.getValue());
-                campaignService.save(newCampaign);
+                Post newPost = new Post();
+                newPost.setCaption(caption.getValue());
+                newPost.setImageUrl(imageUrl.getValue());
+                newPost.setScheduledTime(scheduledTime.getValue().atStartOfDay());
+                newPost.setCampaign(campaignSelect.getValue());
+                postService.save(newPost);
                 updatePostList();
                 dialog.close();
             });
             Button cancel = new Button("Cancel", event -> {
                 dialog.close();
             });
-            HorizontalLayout buttons = new HorizontalLayout(save, delete, cancel);
+            HorizontalLayout buttons = new HorizontalLayout(save, cancel);
             dialog.add(form, buttons);
             dialog.open();
         });

@@ -16,7 +16,7 @@ public class Campaign extends AbstractEntity {
     @Column(name= "campaign_name" , unique=true)
     private String campaign_name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -24,12 +24,5 @@ public class Campaign extends AbstractEntity {
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
-    /*
-    public Campaign() {
-    }
-    public Campaign(String campain_name) {
-        this.campain_name = campain_name;
-    }
 
-     */
 }
